@@ -1,14 +1,22 @@
 <template>
   <div class="v-cart">
-    <h2>Корзина</h2>
-    <vCartItem v-for="(item, index) in cart_data" :key="item.article"
-    :cart_item_data="item" @deleteFromCart="deleteFromCart(index)" />
+    <h2 class="v-cart_title">Корзина</h2>
+    <router-link :to="{ name: 'catalog' }">
+      <div class="v-catalog__link_to_cart">
+        <i class="medium material-icons">shopping_basket</i>
+        {{ CART.length }}
+      </div>
+      <button class="v-catalog__link_to_cart_btn btn">Перейти в каталог</button>
+    </router-link>
+    <p class="v-cart_text" v-if="!CART.length">В корзине пока нет товаров...</p>
+    <vCartItem v-for="(item, index) in CART" :key="item.article" :cart_item_data="item"
+      @deleteFromCart="deleteFromCart(index)" />
   </div>
 </template>
 
 <script>
 import vCartItem from './v-cart-item.vue'
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'v-cart',
@@ -23,8 +31,8 @@ export default {
       }
     }
   },
-  data () {
-    return {}
+  computed: {
+    ...mapGetters(['CART'])
   },
   methods: {
     ...mapActions(['DELETE_FROM_CART']),
@@ -40,9 +48,13 @@ export default {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  color: #000;
+  color: #4e4b4b;
   font-size: 15px;
-  padding: 10px;
-  align-items: center;
+  margin-bottom: 100px;
+}
+
+.v-cart_title,
+.v-cart_text {
+  text-align: center;
 }
 </style>

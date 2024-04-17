@@ -4,7 +4,7 @@
     <p class="v-catalog-item_name">{{ product_data.name }}</p>
     <p class="v-catalog-item_price">{{ product_data.price }}</p>
     <p class="v-catalog-item_about">{{ product_data.about }}</p>
-    <button class="v-catalog-item_btn" @click="addToCart">Add to cart</button>
+    <button class="v-catalog-item_btn btn" @click="addToCart">Добавить в корзину</button>
   </div>
 </template>
 
@@ -18,9 +18,6 @@ export default {
         return {}
       }
     }
-  },
-  data () {
-    return {}
   },
   methods: {
     addToCart () {
@@ -37,5 +34,11 @@ export default {
   padding: 20px;
   margin: 20px;
   text-align: center;
+}
+
+.v-catalog-item_image {
+  width: 160px;
+  display: block;
+  margin: 0 auto;
 }
 </style>
